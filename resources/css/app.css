@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+@source '../**/*.blade.php';
+@source '../**/*.vue';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    /* Brand: banana yellow */
+    --color-brand-50: #fefce8;
+    --color-brand-100: #fef9c3;
+    --color-brand-200: #fef08a;
+    --color-brand-300: #fde047;
+    --color-brand-400: #facc15;
+    --color-brand-500: #eab308;
+    --color-brand-600: #ca8a04;
+    --color-brand-700: #a16207;
+    --color-brand-800: #854d0e;
+    --color-brand-900: #713f12;
+
+    /* Warm neutrals */
+    --color-ink-50: #fafaf7;
+    --color-ink-100: #f4f3ee;
+    --color-ink-200: #e7e5dc;
+    --color-ink-300: #d4d1c4;
+    --color-ink-400: #a8a495;
+    --color-ink-500: #7a7668;
+    --color-ink-600: #59564b;
+    --color-ink-700: #3f3d35;
+    --color-ink-800: #292823;
+    --color-ink-900: #1a1916;
+    --color-ink-950: #12110f;
+
+    /* Ripeness stages */
+    --color-stage-green: #65a30d;
+    --color-stage-turning: #a3b818;
+    --color-stage-ripe: #f5c400;
+    --color-stage-overripe: #9a5b13;
+
+    --shadow-card: 0 1px 2px rgba(26, 25, 22, 0.04), 0 1px 3px rgba(26, 25, 22, 0.06);
+    --shadow-pop: 0 12px 40px -12px rgba(26, 25, 22, 0.25), 0 4px 12px -4px rgba(26, 25, 22, 0.08);
+    --shadow-brand: 0 8px 24px -8px rgba(234, 179, 8, 0.55);
+
+    --animate-fade-up: fade-up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    --animate-shimmer: shimmer 1.4s linear infinite;
+
+    @keyframes fade-up {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: none; }
+    }
+    @keyframes shimmer {
+        to { background-position: -200% 0; }
+    }
+}
+
+@layer base {
+    html { -webkit-tap-highlight-color: transparent; }
+    body { @apply bg-ink-50 text-ink-900 font-sans; font-feature-settings: 'cv11', 'ss01'; }
+    ::selection { @apply bg-brand-300 text-ink-900; }
+    input, select, textarea, button { font: inherit; }
+    :focus-visible { outline: 2px solid var(--color-brand-500); outline-offset: 2px; }
+}
+
+@layer components {
+    .card { @apply bg-white rounded-2xl border border-ink-200/70 shadow-card min-w-0; }
+    .card-pad { @apply p-5; }
+    .btn, .btn-primary, .btn-dark, .btn-ghost, .btn-outline, .btn-danger, .btn-icon {
+        @apply inline-flex items-center justify-center gap-2 h-10 px-4 rounded-xl text-sm font-semibold transition active:scale-[.98] disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap cursor-pointer;
+    }
+    .btn-primary { @apply bg-brand-400 text-ink-900 hover:bg-brand-300 shadow-brand; }
+    .btn-dark { @apply bg-ink-900 text-white hover:bg-ink-800; }
+    .btn-ghost { @apply bg-transparent text-ink-700 hover:bg-ink-100; }
+    .btn-outline { @apply bg-white border border-ink-200 text-ink-800 hover:border-ink-300 hover:bg-ink-50; }
+    .btn-danger { @apply bg-red-50 text-red-700 hover:bg-red-100; }
+    .btn-sm { @apply h-8 px-3 text-xs rounded-lg; }
+    .btn-icon { @apply w-10 px-0; }
+    .input { @apply w-full h-10 px-3.5 rounded-xl border border-ink-200 bg-white text-sm placeholder:text-ink-400 transition focus:outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-200/60; }
+    textarea.input { @apply h-auto py-2.5; }
+    .label { @apply block text-xs font-semibold text-ink-600 mb-1.5; }
+    .chip { @apply inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full text-[11px] font-semibold whitespace-nowrap; }
+    .table-head { @apply text-left text-[11px] font-semibold uppercase tracking-wider text-ink-500 px-4 py-3 bg-ink-50/80 border-b border-ink-200/70; }
+    .table-cell { @apply px-4 py-3 text-sm border-b border-ink-100; }
+    .skeleton { @apply rounded-lg; background: linear-gradient(90deg, var(--color-ink-100) 25%, var(--color-ink-200) 37%, var(--color-ink-100) 63%); background-size: 400% 100%; animation: var(--animate-shimmer); }
+    .section-title { @apply text-[15px] font-bold text-ink-900; }
+    .muted { @apply text-ink-500; }
+    .tabular { font-variant-numeric: tabular-nums; }
+}
+
+.scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: var(--color-ink-300); border-radius: 99px; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+.font-mono { white-space: nowrap; }
